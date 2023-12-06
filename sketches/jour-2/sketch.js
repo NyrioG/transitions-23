@@ -25,7 +25,15 @@ window.draw = function () {
   noStroke();
 
   if (isFinished) {
-    rect(width / 2, height / 2, objSize);
+    fill(0);
+    noStroke();
+    rectMode(CENTER);
+    // strokeWeight(strokeW);
+    stroke(0);
+    line(centerX - objSize / 2, centerY, centerX + objSize / 2, centerY);
+    line(centerX, centerY - objSize / 2, centerX, centerY + objSize / 2);
+
+    // rect(width / 2, height / 2, objSize); // remplacer par croix
   } else {
     ellipse(width / 2, height / 2, objSize);
   }
@@ -105,13 +113,13 @@ window.mouseReleased = function () {
   raining = false;
 };
 
-const gravity = 100;
+const gravity = 250;
 class RainDrop {
   constructor(x, y) {
     this.x = x;
     this.y = y;
     this.length = height + 100;
-    this.speed = random(5, 30) * 40;
+    this.speed = random(20, 40) * 40;
     this.weight = random(20, 30);
     this.blocked = false;
     this.isOut = false;
