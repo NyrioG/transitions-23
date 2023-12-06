@@ -14,7 +14,7 @@ window.windowResized = function () {
 
 window.mouseClicked = function () {
     shapeId++
-    shapeId %= 4
+    shapeId %= 2
 }
 
 window.draw = function () {
