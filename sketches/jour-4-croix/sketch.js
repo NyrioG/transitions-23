@@ -26,3 +26,4 @@ window.draw = function () {
   line(centerX - objSize / 2, centerY, centerX + objSize / 2, centerY);
   line(centerX, centerY - objSize / 2, centerX, centerY + objSize / 2);
 };
+//

@@ -27,6 +27,7 @@ window.mousePressed = function () {
 
 window.draw = function () {
   background(255);
+  //
 
   const sceneSize = min(width, height);
 
