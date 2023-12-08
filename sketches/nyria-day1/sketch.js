@@ -32,6 +32,14 @@ window.draw = function () {
   if (isDragging) targetAngle = 45;
   angle = lerp(angle, targetAngle, 0.5);
 
+  // Ajoutez cette condition pour jouer le son lorsque le rectangle atteint le bord du canevas
+  if (
+    !done &&
+    (corners[0] <= 0 || corners[1] <= 0 || corners[2] <= 0 || corners[3] <= 0)
+  ) {
+    sound1.play();
+  }
+
   const sceneSize = min(width, height);
   const centerX = width / 2;
   const centerY = height / 2;
