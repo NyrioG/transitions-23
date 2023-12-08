@@ -1,3 +1,5 @@
+import { sendSequenceNextSignal } from "../../shared/sequenceRunner.js";
+
 let x = 0;
 let y = 0;
 let corners = [0, 0, 0, 0];
@@ -7,7 +9,7 @@ let sound1;
 let done = false;
 
 window.preload = function () {
-  sound1 = loadSound("./song/sound1.mp3");
+  sound1 = loadSound("./song/shaving.mp3");
 };
 
 window.setup = function () {
@@ -71,6 +73,7 @@ window.draw = function () {
   }
 
   if (
+    !done &&
     corners[0] >= radiusSize &&
     corners[1] >= radiusSize &&
     corners[2] >= radiusSize &&
@@ -80,7 +83,10 @@ window.draw = function () {
     done = true;
     console.log("done");
     // sound1.play();
-    noLoop(); // pour qu'il s'arrêteet donne place a l'autre code !
+    noLoop();
+    setTimeout(() => {
+      sendSequenceNextSignal(); //
+    }, 1000); // pour qu'il s'arrêteet donne place a l'autre code !
   }
 
   background(255);

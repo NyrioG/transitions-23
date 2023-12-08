@@ -157,8 +157,8 @@ window.draw = function () {
       if (allActive) {
         stage = 2;
         setTimeout(function () {
-          sendSequenceNextSignal();
           noLoop();
+          sendSequenceNextSignal();
         }, 1000);
       }
 

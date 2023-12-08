@@ -1,3 +1,5 @@
+import { sendSequenceNextSignal } from "../../shared/sequenceRunner.js";
+
 let drops = [];
 let overlapCheck;
 let raining = false;
@@ -20,6 +22,8 @@ window.draw = function () {
 
   const centerX = width / 2;
   const centerY = height / 2;
+  const strokeW = objSize / 20;
+
   background(255);
   fill(0);
   noStroke();
@@ -28,12 +32,10 @@ window.draw = function () {
     fill(0);
     noStroke();
     rectMode(CENTER);
-    // strokeWeight(strokeW);
+    strokeWeight(strokeW);
     stroke(0);
     line(centerX - objSize / 2, centerY, centerX + objSize / 2, centerY);
     line(centerX, centerY - objSize / 2, centerX, centerY + objSize / 2);
-
-    // rect(width / 2, height / 2, objSize); // remplacer par croix
   } else {
     ellipse(width / 2, height / 2, objSize);
   }
@@ -61,7 +63,6 @@ window.draw = function () {
       }
     }
   }
-
   for (let i = 0; i < drops.length; i++) {
     const drop = drops[i];
     if (isFinished) {
@@ -96,7 +97,7 @@ window.draw = function () {
   const allOut = drops.length > 0 && drops.every((drop) => drop.isOut);
   if (allOut) {
     console.log("done");
-
+    sendSequenceNextSignal();
     noLoop();
   }
 
