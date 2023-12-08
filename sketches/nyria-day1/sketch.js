@@ -75,6 +75,8 @@ window.draw = function () {
     //   sound1.stop();
     //   soundPlayed = false;
     // }
+
+    //
   }
 
   if (isDragging) {
@@ -149,27 +151,27 @@ window.mouseReleased = function () {
   isDragging = false;
 };
 
-window.mouseDragged = function () {
-  // console.log(distToLeft, radiusSize, diagonalSize);
-  // //console.log(r4);
-  // if (x < objSize) {
-  //   //r4 += 100;
-  //   //sound1.play();
-  // }
-  // if (y < objSize) {
-  //   //console.log(r1);
-  //   r1 += 3;
-  //   //sound1.play();
-  //   //ajouter sons raser la barbe
-  // }
-  // if (y > height - objSize) {
-  //   //console.log(r3);
-  //   r3 += 3;
-  //   //sound1.play();
-  // }
-  // if (x > width - objSize) {
-  //   //console.log(r2);
-  //   r2 += 3;
-  //   //sound1.play();
-  // }
-};
+// window.mouseDragged = function () {
+//   // console.log(distToLeft, radiusSize, diagonalSize);
+//   // //console.log(r4);
+//   // if (x < objSize) {
+//   //   //r4 += 100;
+//   //   //sound1.play();
+//   // }
+//   // if (y < objSize) {
+//   //   //console.log(r1);
+//   //   r1 += 3;
+//   //   //sound1.play();
+//   //   //ajouter sons raser la barbe
+//   // }
+//   // if (y > height - objSize) {
+//   //   //console.log(r3);
+//   //   r3 += 3;
+//   //   //sound1.play();
+//   // }
+//   // if (x > width - objSize) {
+//   //   //console.log(r2);
+//   //   r2 += 3;
+//   //   //sound1.play();
+//   // }
+// };
