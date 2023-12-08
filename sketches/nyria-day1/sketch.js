@@ -7,6 +7,7 @@ let angle = 0; // Angle de rotation en degrés
 let isDragging = false;
 let sound1;
 let done = false;
+let soundPlayed = false;
 
 window.preload = function () {
   sound1 = loadSound("./song/shaving.mp3");
@@ -29,34 +30,64 @@ window.windowResized = function () {
 
 window.draw = function () {
   let targetAngle = 0;
-  if (isDragging) targetAngle = 45;
-  angle = lerp(angle, targetAngle, 0.5);
-
-  // Ajoutez cette condition pour jouer le son lorsque le rectangle atteint le bord du canevas
-  if (
-    !done &&
-    (corners[0] <= 0 || corners[1] <= 0 || corners[2] <= 0 || corners[3] <= 0)
-  ) {
-    sound1.play();
-  }
-
   const sceneSize = min(width, height);
   const centerX = width / 2;
   const centerY = height / 2;
   const objSize = sceneSize / 2;
   const radiusSize = objSize / 2;
 
+  if (isDragging) targetAngle = 45;
+  angle = lerp(angle, targetAngle, 0.5);
+  const diagonalSize = Math.sqrt(2) * radiusSize; // 1.41 * objSize
+  //Ajoutez cette condition pour jouer le son lorsque le rectangle atteint le bord du canevas
+  if (
+    !done &&
+    (x < diagonalSize ||
+      x > width - diagonalSize ||
+      y < diagonalSize ||
+      y > height - diagonalSize) &&
+    !soundPlayed
+  ) {
+    sound1.play();
+    soundPlayed = true;
+  } else if (
+    !(
+      x < diagonalSize ||
+      x > width - diagonalSize ||
+      y < diagonalSize ||
+      y > height - diagonalSize
+    )
+  ) {
+    sound1.stop();
+    soundPlayed = false;
+  }
+
   for (let i = 0; i < corners.length; i++) {
     if (corners[i] < radiusSize) {
       corners[i] -= (deltaTime / 1000) * 100;
       corners[i] = max(0, corners[i]);
     }
+
+    // if (!soundPlayed) {
+    //   sound1.play();
+    //   soundPlayed = true;
+    // } else {
+    //   sound1.stop();
+    //   soundPlayed = false;
+    // }
   }
-  const diagonalSize = Math.sqrt(2) * radiusSize; // 1.41 * objSize
+
   if (isDragging) {
     x = constrain(mouseX, radiusSize, width - radiusSize);
     y = constrain(mouseY, radiusSize, height - radiusSize);
+    // sound1.play();
+    if (!soundPlayed) {
+      //sound1.play();
+      //soundPlayed = true;
+    }
   } else {
+    sound1.stop();
+    soundPlayed = false;
     x = lerp(x, width / 2, 0.2);
     y = lerp(y, height / 2, 0.2);
   }
@@ -111,7 +142,6 @@ window.mousePressed = function () {
 
   if (!done && dist(mouseX, mouseY, x, y) < objSize / 2) {
     isDragging = true;
-    // sound1.play();
   }
 };
 
